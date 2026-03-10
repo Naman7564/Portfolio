@@ -127,8 +127,8 @@ const createClothMaterial = () => {
           vec4 blurred = vec4(0.0);
           float total = 0.0;
           
-          for (float x = -2.0; x <= 2.0; x += 1.0) {
-            for (float y = -2.0; y <= 2.0; y += 1.0) {
+          for (float x = -1.0; x <= 1.0; x += 1.0) {
+            for (float y = -1.0; y <= 1.0; y += 1.0) {
               vec2 offset = vec2(x, y) * texelSize * blurAmount;
               float weight = 1.0 / (1.0 + length(vec2(x, y)));
               blurred += texture2D(map, vUv + offset) * weight;
@@ -183,7 +183,7 @@ function ImagePlane({
             onPointerEnter={() => setIsHovered(true)}
             onPointerLeave={() => setIsHovered(false)}
         >
-            <planeGeometry args={[1, 1, 32, 32]} />
+            <planeGeometry args={[1, 1, 16, 16]} />
         </mesh>
     );
 }
@@ -191,7 +191,7 @@ function ImagePlane({
 function GalleryScene({
     images,
     speed = 1,
-    visibleCount = 8,
+    visibleCount = 5,
     fadeSettings = {
         fadeIn: { start: 0.05, end: 0.15 },
         fadeOut: { start: 0.85, end: 0.95 },
@@ -552,7 +552,8 @@ export default function InfiniteGallery({
         <div className={className} style={style}>
             <Canvas
                 camera={{ position: [0, 0, 0], fov: 55 }}
-                gl={{ antialias: true, alpha: true }}
+                gl={{ antialias: false, alpha: true }}
+                dpr={[1, 1.5]}
             >
                 <GalleryScene
                     images={images}
