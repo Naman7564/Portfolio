@@ -1,6 +1,6 @@
 import type React from 'react';
 import { useRef, useMemo, useCallback, useState, useEffect } from 'react';
-import { Canvas, useFrame, useThree } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { useTexture } from '@react-three/drei';
 import * as THREE from 'three';
 
@@ -373,8 +373,6 @@ function GalleryScene({
             plane.z = ((newZ % totalRange) + totalRange) % totalRange;
             plane.x = spatialPositions[i]?.x ?? 0;
             plane.y = spatialPositions[i]?.y ?? 0;
-
-            const worldZ = plane.z - halfRange;
 
             // Calculate opacity based on fade settings
             const normalizedPosition = plane.z / totalRange; // 0 to 1
